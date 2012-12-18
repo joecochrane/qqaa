@@ -19,7 +19,7 @@
 				%br
 			
 				.field
-					-#= f.label :question
+					= f.label :question
 					= f.text_area :text, :cols => "60", :rows => "3"
 				.field
 					= f.label :tags

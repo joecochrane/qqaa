@@ -66,7 +66,7 @@ a:active {color: $green;}
 #hiddencurrentname {display: none;}
 #hiddensignedin {display: none;}
 #questionhead {font-size: 30px}
-#titlediv {width: 600px; margin-left: 40px; font-size: 30px; line-height: 1.1em;}
+#titlediv {width: 600px; margin-left: 40px; font-size: 30px; line-height: 1.3em;}
 
 #upcount {font-size: 24px; margin-left: 10px; }
 .aupcount {font-size: 24px; margin-left: 10px; }

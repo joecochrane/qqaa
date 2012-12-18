@@ -69,12 +69,12 @@ end
 	puts '*'
 	puts '*'
 	puts '*'
-	puts current_user
+	puts @current_user
 	puts '*'
-	if current_user.nil?
+	if @current_user.nil?
 		false
 	else
-	    if current_user.id == watched
+	    if (@current_user.id == watched)
 			true
 		else
 			false
