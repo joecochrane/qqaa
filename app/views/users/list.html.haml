@@ -1,0 +1,31 @@
+render :partial=>'layouts/strip'
+
+#content	
+		
+	if rakish?
+		h1 Listing users
+
+		table
+			tr
+				th Name
+				th Email
+				th Location
+				th
+				th
+				th
+
+
+		@users.each do |user|
+			tr
+				td= user.name
+				td= user.email 
+				td= user.password
+				td= user.encrypted_password
+				td= user.salt
+				td= user.location
+				td= link_to 'Show', user
+				td= link_to 'Edit', edit_user_path(user)
+				td#= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
+
+
+br

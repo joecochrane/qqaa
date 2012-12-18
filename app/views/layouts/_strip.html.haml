@@ -1,0 +1,46 @@
+#strip
+	- if signed_in?
+		%span#welcome Welcome 
+		#stripusername
+			= link_to (current_user.name[0..12]), user_path(current_user.id)
+		#stripsignout
+			| 
+			= link_to "Sign out", signout_path, :method => :delete 
+		-if frompage != 'ask'	
+			#stripask
+				|
+				= link_to "Ask Question", new_question_path
+		
+	- else
+		-if frompage != 'newuser'
+			#signup
+				= link_to "Sign up ", signup_path
+		-if frompage != 'newsession'
+			#signindiv
+				-if frompage != 'newuser'
+					|
+				= link_to "Sign in ", signin_path
+		
+	
+	-if rakish?
+		#stripadminlistusers
+			|
+			= link_to "Admin List Users", users_path
+		#stripeditquestion
+			|
+			= link_to "Edit Question", editquestion_path
+		
+	-if frompage != 'index'
+		#striprecentquestions
+			|	
+			= link_to "Recent Questions", questions_path	
+	
+	-if (frompage != 'about') && !rakish?
+		#stripabout
+			|
+			= link_to "About", about_path
+	
+	-if (frompage != 'contact') && !rakish?		
+		#stripcontact
+			|
+			= link_to "Contact", contact_path

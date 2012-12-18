@@ -1,0 +1,91 @@
+// Place all the styles related to the Questions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$pink : #FFC0CB;
+$green: #33FF33;
+$grey: #999999;
+$white: #ffffff;
+$black: #000000;
+$big: 24px;
+$bigtitle: 30px;
+
+a {text-decoration: none;}
+a:link {color: $black;}
+a:visited {color: $black;}
+a:hover {color: $grey; background-color: $pink;}
+a:active {color: $green;}
+
+#header { background-color: $grey; width: 900px; height: 100px; }
+#logo {position: absolute; left: 50px; top: 20px; }
+#headertext {position: absolute; left: 80px; top: 90px; font-size:10px; color: $white;}
+
+#strip {width: 900px; height: 30px; background-color: $pink; font-family: Amaze; font-size: 12px;}
+#signup {position: relative; float: left;  background-color: "#000000"; margin: 5px; }
+#signindiv {position: relative; float: left;  margin: 5px;}
+#askbutton {position: absolute; top: 2px; left: 120px;}
+#recentbutton {position: absolute; top: 2px; left: 230px;}
+#welcome {position: relative; float: left; margin-top: 5px; margin-right: 0px;}
+#stripusername {position: relative; float: left; margin: 5px;}
+#stripsignout {position: relative; float: left; margin: 5px;}
+#stripadminlistusers {position: relative; float: left; margin: 5px;}
+#stripeditquestion {position: relative; float: left; margin: 5px;}
+#striprecentquestions {position: relative; float: left; margin: 5px;}
+#stripask {position: relative; float: left; margin: 5px;}
+#stripabout {position: relative; float: left; margin: 5px;}
+#stripcontact {position: relative; float: left; margin: 5px;}
+
+#content {font-size: 12px; position: absolute; top: 155px; width: 900px; height: 600px; background-color: $white;}
+#qupvoteheader {float: left; width: 80px; margin-left: 650px;}
+#qancountheader {float: left; width: 70px; }
+#qcatheader {float: left; width: 50px; }
+#recentq {float: left; width: 300px; font-size: 24px;}
+#labelcat {float: left; width: 150px; font-size: 12px;}
+#seeonly {float: left; width: 100px; font-size: 12px;}
+
+#questionblock {clear: left;}
+#qname {float:left; width:80px; margin-left: 10px;}
+#questiontext {float: left; width: 500px; margin-right: 100px;}
+#qups  {float:left; width:50px;}
+#qans {float:left; width:60px;}
+#qupshidden  {float:left; width:50px; color: $white;}
+#qancounthidden {float:left; width:60px; color: $white;}
+#qcat  {float:left; width:100px;}
+
+#content2 {position: absolute; top: 155px; width: 700px; height: 600px; background-color: $white;}
+#askheader {position: absolute; top: 0px; width: 500px;}
+#newquestion {position: absolute; top: 30px; margin-left: 20px;}
+#forminput {position: absolute; top: 20px;}
+#notes {position: relative; top: 50px;}
+
+
+
+#qcontent {position: relative; top: 0px; width: 900px; height: 600px; background-color: $white; font-size: 14px; font-family: Ariel;}
+#hiddenquestionid {display: none;}
+#hiddencurrentuser {display: none;}
+#hiddencurrentname {display: none;}
+#hiddensignedin {display: none;}
+#questionhead {font-size: 30px}
+#titlediv {width: 600px; margin-left: 40px; font-size: 30px;}
+
+#upcount {font-size: 24px; margin-left: 10px; }
+.aupcount {font-size: 24px; margin-left: 10px; }
+#qshowbutton {margin-left: 10px; }
+.ashowbutton {margin-left: 10px; }
+#from {top: 10px;left: 10px;}
+#qusername {top: 10px; left: 80px;}
+#tags {top: 40px; left: 700px;}
+#tagtext {top: 60px; left: 700px;}
+#answer { }
+#answerheader {font-size: $bigtitle;}
+#answertextdiv {width: 700px; margin: 50px;}
+#newanswer {top: 20px;}
+#newanswerheader {top: 20px; height:20px; clear:left;}
+.boldy {font-size: 20px}
+#commenthead {font-size: 24px; clear: left;}
+#commentuser {position: relative; float: left; width: 100px;}
+#commenttext {position: relative; float: left; width: 600px;}
+#cdiv {clear: left;}
+.ajax {display: none;}
+#hiddengroup {display: none;}
+

@@ -1,0 +1,194 @@
+-# This is show question
+
+= render :partial=>'layouts/header'
+= render :partial=>'layouts/strip', :locals => {:frompage => "show" }
+
+
+
+#qcontent	
+	%span#hiddenquestionid= @question.id
+	-if !current_user.nil?
+		%span#hiddencurrentuser= current_user.id
+		%span#hiddencurrentname= current_user.name
+		%span#hiddensignedin= 'true'
+	-else
+		%span#hiddensignedin= 'false'
+	%br
+	
+	#titlediv
+		-if @question.text.include? '<'
+			%span#questionhead Question
+			%br
+			%span= raw(simple_format(@question.text))			
+		-else
+			%span= @question.text
+	%br
+	%span#from Asked by
+	= link_to @question.user.name, user_path(@question.user.id), :id => 'qusername'
+	%br
+	-if !current_user.nil?
+		%span Upvote this question
+		-if User.has_upvoted(@question.qupvotesfrom,current_user.id)
+			= image_tag("upvotegreen.png", :border => 0, :id => "qupvotebutton1")
+		-else
+			= image_tag("upvote.png", :border => 0, :id => "qupvotebutton1")
+	-else
+		%span Question upvotes
+	-if !@question.qupvotesfromcount.nil?
+		%span#upcount= @question.qupvotesfromcount
+		= image_tag("show.png", :border => 0, :id => "qshowbutton")
+	-else
+		%span#upcount 0
+	
+	%br
+	
+	#upvotesdiv
+		%span upvotes from: 
+		
+		-textlist = User.putNamesToIds(@question.qupvotesfrom,@users)
+		-textlistsplit = textlist.split(',')
+		-if !@question.qupvotesfrom.nil?
+			-uindex = @question.qupvotesfrom.split(',')
+		-else
+			-uindex = ''
+		%ul#list
+			-for i in 0..textlistsplit.length-1
+				%li= link_to textlistsplit[i], user_path(uindex[i])
+		%br
+	%b
+		%span#tags tags
+	%span#tagtext= @question.tags
+	%br
+	%b
+		%span category
+	%span= Question.qcats[@question.qcat.to_s]
+	%br
+	
+
+	#oldanswer
+		-mostupvotedgroup = '0'
+		-mostupvotedcount = 0
+		-if @answers.length > 0 
+			%br
+			%span#answerheader Answers
+			%br
+			- (1..Question.cats.length).each do |i|
+				- done = false
+				- @answers.each do |answer|
+					- if answer.category == i && !done
+						= image_tag(Question.cats[i.to_s] + "squarebutton.png", :border => 0, :class => Question.cats[i.to_s] + "squarebutton")
+						- done = true
+			- (1..Question.cats.length).each do |i|			
+				- @answers.each do |answer|		
+					- if answer.category == i	
+						%div{:class => "#{Question.cats[i.to_s]}"}	
+							= image_tag(Question.cats[i.to_s] + "squarebutton.png", :border => 0)
+							%br
+							%span Answered by
+							%span= answer.user.name
+							%br
+							-if !current_user.nil?
+								%span Upvote this answer
+								-if User.has_upvoted(answer.aupvotesfrom,current_user.id)									
+									= image_tag("upvotegreen.png", :border => 0, :class => "aupvotebutton", :id => answer.id.to_s)
+								-else
+									= image_tag("upvote.png", :border => 0, :class => "aupvotebutton", :id => answer.id.to_s)
+							-else 
+								%span Answer upvotes
+							-if !answer.aupvotesfromcount.nil?
+								%span(class="aupcount" id="aid_#{answer.id}")= answer.aupvotesfromcount
+								= image_tag("show.png", :border => 0, :class => "ashowbutton", :id => answer.id.to_s)
+								-if answer.aupvotesfromcount >= mostupvotedcount 
+									-mostupvotedcount = answer.aupvotesfromcount
+									-mostupvotedgroup = answer.category
+							-else
+								%span(class="aupcount" id="aid_#{answer.id}") 0
+								-if (answer.aupvotesfromcount.nil?) && (mostupvotedcount == 0)
+									-mostupvotedgroup = answer.category
+							%br	
+							
+							.box{:id => "aiddiv_#{answer.id}"}								
+								-textlist = User.putNamesToIds(answer.aupvotesfrom,@users)
+								-textlistsplit = textlist.split(',')
+								-if !answer.aupvotesfrom.nil?
+									-uindex = answer.aupvotesfrom.split(',')
+								-else
+									-uindex = ''
+								%span upvotes from: 
+								%ul{:id => "list_#{answer.id}", :class => "alist"}
+									-for i in 0..textlistsplit.length-1
+										%li= link_to textlistsplit[i], user_path(uindex[i])
+									%br
+							#answertextdiv
+								%b
+									%span#answer= raw(simple_format(answer.text))
+							%br
+							.comment{:id => "commdiv_#{answer.id}"}	
+								%br
+								- answer.comments.each do |comment|	
+									#cdiv
+										-if comment.text.length > 100
+											%br
+										#commentuser
+											%span= comment.user.name[0..14]
+										#commenttext
+											%span= comment.text
+											-if comment.text.length > 100
+												%br
+									%br
+								%br
+							.commentbox{:id => "cb_#{answer.id}"}	
+								-if !current_user.nil?
+									%br
+									%p#commenthead Comment on this answer
+									
+									.ajax{:id => "ajaxbox_#{answer.id}"}
+										= text_area_tag "tb_#{answer.id}", nil, :cols => "60", :rows => "3"
+										%br
+										= image_tag("commentbutton.png", :border => 0, :class => "commentclass", :id => "comment_#{answer.id}")
+										%br
+						
+		-else
+			%br
+			%br
+			.boldy
+				%span No answers yet
+
+	#newanswer
+		-if !current_user.nil?
+			%h1#newanswerheader New Answer
+			= form_for @answer do |f|
+				- if @answer.errors.any?
+					#error_explanation
+						%h2= "#{pluralize(@answer.errors.count, "error")} prohibited this answer from being saved:"
+						%ul
+							- @answer.errors.full_messages.each do |msg|
+								%li= msg
+				
+					
+				.field
+					= f.label :category
+					= f.collection_select :category, Question.cats, :first, :last	
+				.field
+					= f.hidden_field(:question_id, :value => @question.id)
+				.field
+					= f.hidden_field(:user_id, :value => current_user.id)				
+				.field
+					-# = f.label :text
+					= f.text_area :text, :size => "80x4" 
+
+				.actions
+					= f.submit 'Answer'
+		-else
+			%br
+			%br
+			.boldy
+				= link_to "Sign up ", signup_path
+				%span or
+				= link_to "Sign in ", signin_path
+				-if @answers.length > 0 
+					%span  to create a better answer
+				-else
+					%span to answer the question
+	%span#hiddengroup= Question.cats[mostupvotedgroup.to_s]		
+	

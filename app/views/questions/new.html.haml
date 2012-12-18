@@ -1,0 +1,40 @@
+= render :partial=>'layouts/header'
+= render :partial=>'layouts/strip', :locals => {:frompage => "ask" }
+
+
+#content2
+	#newquestion 
+		%h1#askheader Ask a question
+		#forminput
+			= form_for @question do |f|	
+				- if @question.errors.any?
+					#error_explanation
+						%h2= "#{pluralize(@question.errors.count, "error")} prohibited this question from being asked:"
+						%ul
+							- @question.errors.full_messages.each do |msg|
+								%li= msg
+
+
+				%br
+				%br
+			
+				.field
+					= f.label :question
+					= f.text_area :text, :cols => "60", :rows => "3"
+				.field
+					= f.label :tags
+					= f.text_field :tags, :size => 50
+				%span Tags are comma separated
+				%br
+				%br
+				.field
+					= f.label :category
+					= f.collection_select :qcat, Question.noallqcats, :first, :last	
+				%br
+				.actions
+					= f.submit 'Ask'
+
+		
+		
+
+

@@ -1,0 +1,28 @@
+- render :partial=>'layouts/strip'
+
+#content	
+		
+	%h1 Banned users
+
+	%table
+		%tr
+			%th Name
+			%th Email
+			%th Banned
+			%th
+			%th
+			%th
+
+
+	- @users.each do |user|
+		%tr
+			%td= user.name
+			%td= user.email 
+			%td= user.password
+
+			%td= user.banned
+			%td= link_to 'Show', user
+			%td= link_to 'Edit', edit_user_path(user)
+			
+
+		%br

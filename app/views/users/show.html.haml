@@ -1,0 +1,107 @@
+-# This is show user
+
+= render :partial=>'layouts/header'
+= render :partial=>'layouts/strip', :locals => {:frompage => "user" }
+
+%br
+	%span#username= @user.name
+	-if !current_user.nil?
+		-if @user.id != current_user.id
+			-if User.has_upvoted(@user.upvotesfrom,current_user.id)
+				= image_tag("upvotegreen.png", :border => 0, :id => "upvotebutton1")
+			-else
+				= image_tag("upvote.png", :border => 0, :id => "upvotebutton1")
+%br
+	-if !@user.location.nil?
+		%b Location:
+		= @user.location
+	%span#hiddenuser= @user.id
+	-if !current_user.nil?
+		%span#hiddencurrentuser= current_user.id
+		%span#hiddencurrentname= current_user.name
+	%br
+	
+	%b Email:
+	= @user.email
+	%br
+	%b
+		%span= @user.name
+		%span  has upvoted:
+	%span= User.putNamesToIds(@user.upvotesto,@users)
+	%br
+	-# %span upvotes to
+	-# %span= @user.upvotesto
+	-# %br
+	%b
+		%span= @user.name
+		%span has upvotes from:
+	%span#upvotesfrom= User.putNamesToIds(@user.upvotesfrom,@users)
+	-# %br
+	-# %span upvotes from
+	-# %span= @user.upvotesfrom
+%br
+
+= raw(@user.background)
+%br
+%br
+%b
+	%span Upvoted questions:
+%br
+-textlist = Question.putTextsToIds(@user.qupvotesto,@qtexts)
+-if !textlist.nil?
+	-textlistsplit = textlist.split(',')
+-else
+	-textlistsplit = ''
+-if !@user.qupvotesto.nil?
+	-qindex = @user.qupvotesto.split(',')
+-else
+	-qindex = ''
+-for i in 0..textlistsplit.length-1
+	= link_to textlistsplit[i], question_path(qindex[i])
+	%br
+
+
+%br
+%br
+-if @questions.length > 0
+	%span#showrecent Questions by
+	%span#showrecent= @user.name
+	%br
+	%br
+	%b
+		%span#qtagsheader Tags
+	%br
+	- @questions.each do |question|
+		#showquestions	
+			#qname
+				%span= question.user.name[0..12]
+			#qtext
+				= link_to (question.text[0..60]), question_path(question.id)
+			%span.spacer50 ...
+			%span#qtags= question.tags[0..30]
+			%br
+
+%br
+%br
+
+-if @answers.length > 0
+	%span#showrecent Answers by
+	%span#showrecent= @user.name
+	%br
+	%br
+	- @answers.each do |answer|
+		#showanswers
+			#qname
+				%span= answer.user.name
+			#anstext
+				= link_to (Question.cats[answer.category.to_s]), question_path(answer.question_id)
+			#usantext
+				%span= answer.text[0..60]
+			%br	
+%br
+%br
+
+-if is_user?(@user.id)
+	%b
+		= link_to 'Edit', edit_user_path(@user)
+

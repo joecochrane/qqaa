@@ -1,0 +1,7 @@
+= render :partial=>'layouts/header' 
+= render :partial=>'layouts/strip', :locals => {:frompage => "newuser" }
+
+#newuser
+	%h1 New user
+	= render 'formnew'
+

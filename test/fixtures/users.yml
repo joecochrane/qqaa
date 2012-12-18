@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  name: MyString
+  email: MyString
+  password: MyString
+  encrypted_password: MyString
+  admin: false
+  banned: false
+  upvotesfrom: MyText
+  upvotesto: MyText
+  qupvotesto: MyText
+  aupvotesto: MyText
+  salt: MyString
+  location: MyString
+  background: MyText
+
+two:
+  id: 1
+  name: MyString
+  email: MyString
+  password: MyString
+  encrypted_password: MyString
+  admin: false
+  banned: false
+  upvotesfrom: MyText
+  upvotesto: MyText
+  qupvotesto: MyText
+  aupvotesto: MyText
+  salt: MyString
+  location: MyString
+  background: MyText

@@ -1,0 +1,28 @@
+= form_for @user do |f|
+	- if @user.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+			%ul
+				- @user.errors.full_messages.each do |msg|
+					%li= msg
+
+
+	.field
+		= f.label :name
+		= f.text_field :name, :value => '', :size => 18
+	.field
+		= f.label :email
+		= f.text_field :email, :value => '', :size => 24
+	.field
+		= f.label :password
+		= f.password_field :password, :value => '', :size => 18
+
+	.field
+		= f.hidden_field(:background, :value => "<img src='/images/clouds2.JPG' /> ")
+	
+
+	
+	
+	
+	.actions
+		= f.submit 'Save'

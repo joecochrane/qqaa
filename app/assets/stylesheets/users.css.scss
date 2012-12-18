@@ -1,0 +1,24 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$big: 30px;
+
+#newuser {margin: 30px;}
+
+#showrecent {font-size: 30px; float: left; margin: 5px;}
+#username {font-size: $big; float:left; margin-right: 10px; }
+
+#hiddenuser {display: none;}
+#hiddencurrentuser {display: mone;}
+#hiddencurrentname {display: none;}
+
+#qtagsheader {float:left; width:100px; margin-left: 520px;}
+#showquestions {clear: left;}
+#qtext {float:left; width:350px;}
+#qtags {float:left; width:250px;}
+.spacer50 {float:left; width:50px; color: #FFFFFF;}
+
+#showanswers {clear: left;}
+#anstext {float:left; width:150px;}
+#usantext {width: 400px; float:left; }

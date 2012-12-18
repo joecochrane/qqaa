@@ -1,0 +1,20 @@
+= render :partial=>'layouts/header' 
+= render :partial=>'layouts/strip', :locals => {:frompage => "newsession" }
+
+
+#signin	
+	%h1 Sign in
+	%br
+	= form_for(:session, :url => sessions_path) do |f| 
+		.field
+			= f.label :name
+			= f.text_field :name, :size => 18
+
+		.field
+			= f.label :password
+			= f.password_field :password, :size => 18
+		%br
+		.actions
+			= f.submit "Sign in"
+
+

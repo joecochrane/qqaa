@@ -1,0 +1,9 @@
+%h1 Editing user
+
+
+-if @user.id == @current_user.id
+	= render 'form'
+
+	= link_to 'Show', @user
+	\|
+	= link_to 'Back', users_path

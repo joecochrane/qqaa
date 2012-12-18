@@ -1,0 +1,43 @@
+
+= render :partial=>'layouts/header'
+= render :partial=>'layouts/strip', :locals => {:frompage => "index" }
+
+
+#content
+	%span#recentq Recent Questions
+	
+	= form_tag questions_path, :method => "get" do
+		= collection_select(:question, :qcat, Question.qcats, :first, :last)
+		= submit_tag "See only", :name => nil
+
+	%br
+
+	- if @questions.length > 0
+		%b
+			%span#qupvoteheader Up votes
+			%span#qancountheader Answers
+			%span#qcatheader Cat
+		%br
+		%br
+		
+		- @questions.each do |question|
+			#questionblock
+				#qname
+					= link_to (question.user.name[0..10]), user_path(question.user.id)
+				#questiontext
+					%b
+						= link_to (question.text[0..150]), question_path(question.id)
+				-if question.qupvotesfromcount.nil?
+					%span#qupshidden 0
+				-else
+					%span#qups= question.qupvotesfromcount
+				-if question.answercount.nil?
+					%span#qancounthidden 0
+				-else
+					%span#qans= question.answercount
+				%span#qcat= Question.qcats[question.qcat.to_s]
+				%br
+	- else
+		%span No questions found
+
+		
